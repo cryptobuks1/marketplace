@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'Cera Pro';
+  font-weight: 400;
+  src: url(/fonts/CeraProRegular.otf);
+}
+
+@font-face {
+  font-family: 'Cera Pro';
+  font-weight: 500;
+  src: url(/fonts/CeraProMedium.otf);
+}
+
+@font-face {
+  font-family: 'Cera Pro';
+  font-weight: 600;
+  src: url(/fonts/CeraProBold.otf);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Cera Pro';
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

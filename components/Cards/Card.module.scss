@@ -1,0 +1,128 @@
+div.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 1px rgb(20 21 26 / 10%), 0 3px 6px rgb(71 77 87 / 4%), 0 1px 2px rgb(20 21 26 / 4%);;
+
+  div.pfp {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      margin-left: 4px;
+      margin-top: 2px;
+    }
+  }
+
+  div.img {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.1s ease;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    &:active { transform: scale(0.95); }
+  }
+
+  p.name {
+    font-weight: 600;
+    color: #040405;
+    margin-top: 4px;
+  }
+
+  div.quickBuy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+    
+    p.price {
+      font-weight: 600;
+      font-size: 14px;
+      
+      span {
+        font-size: 13px;
+        color: #969696;
+      }
+    }
+  }
+
+  div.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 3px 12px;
+    border-radius: 2px;
+    border: 1px solid #7eaaff;
+    background-color: #268dfc3a;
+    box-shadow: 0px 1px 9px #c9e3ff;
+    color: #1a7ae0;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.1s ease;
+
+    i.spinner {
+      -webkit-animation: spin 1.5s linear infinite;
+      -moz-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+      margin-right: 5px;
+      font-size: 11px;
+    }
+
+    &:active { transform: scale(0.95); }
+  }
+  
+  div.disabledBTN {
+    background-color: #dedede;
+    border: 1px solid #828588;
+    box-shadow: 0px 1px 9px #dadada;
+    color: #828588;
+    cursor: not-allowed;
+  }
+
+  div.notForSale {
+    font-size: 14px;
+    font-weight: 500;
+    color: #879292;
+  }
+}
+
+// Keyframes
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

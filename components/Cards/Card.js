@@ -72,7 +72,8 @@ const Card = ({Web3, nft, wallet, supabase, tokenABI, nftABI, NFT_CONTRACT, TOKE
             <p>Not for Sale</p>
           </div>
         }
-      </div>
+      </div> 
+      {/* TEST */}
     </div>
   )
 }

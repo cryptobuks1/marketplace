@@ -1,8 +1,89 @@
 div.home {
 
+  div.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    padding-bottom: 0;
+
+    p.title {
+      color: #040405;
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    div.selection {
+      position: relative;
+
+      div.days {
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 2px;
+        user-select: none;
+        cursor: pointer;
+        transition: 0.1s ease;
+        
+        p {
+          font-size: 30px;
+          font-weight: 600;
+          color: #212121;
+          background: linear-gradient(90deg, #268ffc 0%, #833ab4 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        
+        i {
+          font-size: 14px;
+          margin-left: 8px;
+          color: #833ab4;
+        }
+        
+        &:active { transform: scale(0.97); }
+      }
+      
+      div.dropdown {
+        position: absolute;
+        background-color: #ffffff;
+        color: #040405;
+        width: 140px;
+        border-radius: 8px;
+        box-shadow: rgb(4 4 5 / 20%) 0px 7px 36px -8px;
+        z-index: 12;
+
+        p {
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 14px;
+          transition: all 0.12s ease-in-out 0s;
+          text-align: left;
+          min-height: 35px;
+          padding: 8px 12px;
+          margin: 5px;
+          border-radius: 6px;
+          
+          &:hover {
+            background-color: rgba(4, 4, 5, 0.05);
+          }
+        }
+      }
+    }
+  }
+
   div.cards {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+  }
+
+  div.horizontalCards {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, 300px);
+    grid-template-rows: minmax(150px, 1fr);
+    overflow-x: scroll;
+
+    div {
+    }
   }
 
   div.approve {
@@ -32,6 +113,15 @@ div.home {
   }
 }
 
+@media screen and (max-width: 1150px) {
+  div.home {
+
+    div.cards {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   div.home {
 
@@ -43,6 +133,24 @@ div.home {
 
 @media screen and (max-width: 500px) {
   div.home {
+
+    div.header {
+      padding: 0px 14px;
+  
+      p.title {
+        font-size: 24px;
+      }
+
+      div.selection {
+
+        div.days {
+
+          p {
+            font-size: 24px;
+          }
+        }
+      }
+    }  
 
     div.cards {
       grid-template-columns: 1fr;

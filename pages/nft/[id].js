@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Jazzicon from '../../components/Misc/Jazzicon'
 import styles from './id.module.scss'
+import { likeNFT, getIfNFTLiked, unlikeNFT } from '../../utils/Likes'
+import { getUser } from '../../utils/Users'
 const tokenABI = require('../../contracts/abis/Token.json')
 const nftABI = require('../../contracts/abis/NFT.json')
 
@@ -15,8 +17,28 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
   const [approveLoading, setApproveLoading] = useState(false)
   const [buyLoading, setBuyLoading] = useState(false)
   const [listingLoading, setListingLoading] = useState(false)
+  const [owner, setOwner] = useState()
+  const [holder, setHolder] = useState()
+  const [liked, setLiked] = useState(false)
+  const [likeCount, setLikeCount] = useState()
+  const [currentUser, setCurrentUser] = useState()
 
   const loadURL = (url) => window.open(url)
+
+  const getUsers = async() => {
+    const ownerData = await supabase
+      .from('profiles')
+      .select()
+      .match({address: nft.owner})
+
+    setOwner(ownerData.data[0])
+
+    const holderData = await supabase
+      .from('profiles')
+      .select('*')
+      .match({address: nft.holder})
+    setHolder(holderData.data[0])
+  }
 
   const listNFT = async() => {
     setListingLoading(true)
@@ -67,29 +89,47 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
     setProcessLoading(false)
   } 
 
-  useEffect(() => {
-    setWallet(localStorage.getItem('wallet'))
-  })
+  useEffect(async () => {
+    const user = await getUser(ethereum.selectedAddress)
+    
+    getUsers()
+    setWallet(ethereum.selectedAddress)
+    setCurrentUser(user)
+    getIfNFTLiked(nft, user, setLiked, setLikeCount)
+  }, [])
 
   return (
     <div className={styles.id}>
-      {console.log(nft)}
       <div className={styles.img}>
         <div style={{backgroundImage: `url(${nft.data.image})`}}>
           <i className='far fa-search-plus' onClick={() => loadURL(nft.data.image)}></i>
         </div>
       </div>
       <div className={styles.details}>
-        <p className={styles.name}>{nft.data.name}</p>
+        <div className={styles.top}>
+          <p className={styles.name}>{nft.data.name}</p>
+          <div className={`${styles.likes} ${liked && styles.liked}`} onClick={() => !liked ? likeNFT(nft, currentUser, setLiked, likeCount, setLikeCount) : unlikeNFT(nft, currentUser, setLiked, likeCount, setLikeCount)}>
+            <i className={!liked ? 'far fa-heart' : 'fas fa-heart'}></i> 
+            {likeCount}
+          </div>
+        </div>
 
         <div className={styles.accounts}>
           <ul>
-            <li>Owner:</li>
-            <li><Jazzicon account={nft.owner} diameter={20} /> {nft.owner.slice(0, 6)}...{nft.owner.slice(38, 42)}</li>
+            <li>Owner: {nft.owner == wallet && '(You)'}</li>
+            {owner ?
+              <li><div className={styles.img} style={{backgroundImage: `url(${owner.profileImage})`}} /> {owner.name}</li>
+            :
+              <li><Jazzicon account={nft.owner} diameter={34} /> {nft.owner.slice(0, 6)}...{nft.owner.slice(38, 42)}</li>
+            }
           </ul>
           <ul>
-            <li>Holder:</li>
-            <li><Jazzicon account={nft.holder} diameter={20} /> {nft.holder.slice(0, 6)}...{nft.holder.slice(38, 42)}</li>
+            <li>Holder: {nft.holder == wallet && '(You)'}</li>
+            {holder ?
+              <li><div className={styles.img} style={{backgroundImage: `url(${holder.profileImage})`}} /> {holder.name}</li>
+            :
+              <li><Jazzicon account={nft.holder} diameter={34} /> {nft.holder.slice(0, 6)}...{nft.holder.slice(38, 42)}</li>
+            }
           </ul>
         </div>
 
@@ -99,7 +139,7 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
           <div className={styles.buy}>
             <ul>
               <li>Price</li>
-              <li>{nft.price} <span>WASTE</span></li>
+              <li>{nft.price} <span>BNB</span></li>
             </ul>
 
             {nft.holder != wallet ? 
@@ -124,10 +164,10 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
           <div className={styles.list}>
             <ul>
               <li>Not for sale</li>
-              <li><span>Previous Price:</span> {nft.price} WASTE</li>
+              <li><span>Previous Price:</span> {nft.price} BNB</li>
             </ul>
             {wallet == nft.holder &&
-              <div className={styles.btn} onClick={listNFT}>
+              <div className={`${styles.btn} ${styles.secondary}`} onClick={listNFT}>
                 {!listingLoading ?
                   <>
                     <i className='far fa-check'></i>

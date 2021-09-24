@@ -1,16 +1,23 @@
-div.erc721 {
-  width: 400px;
+div.address {
+  width: 300px;
   margin: 0 auto;
-  padding-block: 20px;
-  
+
   div.fileField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
     border: 2px dashed #dedede;
+    border-radius: 100px;
     background-color: #ffffff;
-    padding-block: 30px;
 
     p.supportedFiles {
       text-align: center;
       margin-bottom: 18px;
+      font-size: 12px;
       font-weight: 500;
       color: #879292;
     }
@@ -22,6 +29,7 @@ div.erc721 {
       margin: 0 auto;
       padding: 8px 14px;
       border-radius: 2px;
+      border: 1px solid #7eaaff;
       background-color: #268dfc3a;
       color: #1a7ae0;
       font-size: 14px;
@@ -67,24 +75,27 @@ div.erc721 {
 
   div.imgPreview {
     position: relative;
-
-    img {
-      width: 100%;
-      border-radius: 2px;
-    }
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 100px;
 
     i {
       display: flex;
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #fc26265a;
+      bottom: 0;
+      right: 0;
+      background-color: #fc26263a;
       color: #e01a1a;
       font-size: 13px;
       width: 30px;
       height: 30px;
+      border: 1px solid #e01a1a;
       border-radius: 50px;
       cursor: pointer;
       user-select: none;
@@ -124,19 +135,7 @@ div.erc721 {
     }
   } // div.inputField
 
-  div.disclaimer {
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 500;
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-  } // div.disclaimer
-
-  div.mintBTN {
+  div.updateBTN {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,8 +144,10 @@ div.erc721 {
     margin-top: 30px;
     padding: 8px 14px;
     border-radius: 2px;
-    color: #1a7ae0;
+    border: 1px solid #7eaaff;
     background-color: #268dfc3a;
+    box-shadow: 0px 1px 9px #c9e3ff;
+    color: #1a7ae0;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
@@ -169,7 +170,6 @@ div.erc721 {
   } // div.mintBTN
 }
 
-
 // Keyframes
 @-moz-keyframes spin {
   100% {
@@ -186,11 +186,5 @@ div.erc721 {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
-  }
-}
-
-@media screen and (max-width: 500px) {
-  div.erc721 {
-    width: 90%;
   }
 }

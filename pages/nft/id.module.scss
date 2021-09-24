@@ -15,8 +15,8 @@ div.id {
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      width: 80%;
-      height: 380px;
+      width: 90%;
+      height: 65%;
 
       i {
         display: flex;
@@ -26,10 +26,9 @@ div.id {
         position: absolute;
         bottom: 10px;
         right: 10px;
-        border: 1px solid #7eaaff;
+        color: #1a7ae0;
         background-color: #268dfc3a;
-        color: #7eaaff;
-        width: 35px;
+        width: 40px;
         height: 35px;
         cursor: pointer;
         transition: 0.1s ease;
@@ -45,9 +44,42 @@ div.id {
     flex-direction: column;
     padding: 10px;
 
-    p.name {
-      font-size: 30px;
-      font-weight: 600;
+    div.top {
+
+      p.name {
+        font-size: 30px;
+        font-weight: 600;
+      }
+
+      div.likes {
+        width: fit-content;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid #dedede;
+        padding: 5px 11px;
+        border-radius: 100px;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.1s ease;
+
+        &.liked {
+          border: 1px solid #e91111;
+          background-color: #e91111;
+          color: #ffffff;
+
+          i {
+            color: #ffffff;
+          }
+        }
+        
+        i {
+          font-size: 12px;
+          margin-right: 5px;
+          color: #808080;
+        }
+
+        &:active { transform: scale(0.95); }
+      }
     }
 
     p.description {
@@ -81,6 +113,15 @@ div.id {
               display: flex;
               align-items: center;
               margin-right: 6px;
+            
+              &.img {
+                width: 34px;
+                height: 34px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                border-radius: 50px;
+              }
             }
           }
         }
@@ -154,10 +195,8 @@ div.id {
       margin: 0 auto;
       padding: 8px 14px;
       border-radius: 2px;
-      border: 1px solid #7eaaff;
-      background-color: #268dfc3a;
-      box-shadow: 0px 1px 9px #c9e3ff;
-      color: #1a7ae0;
+      background-color: #268ffc;
+      color: #ffffff;
       font-weight: 500;
       cursor: pointer;
       user-select: none;
@@ -177,11 +216,14 @@ div.id {
       &:active { transform: scale(0.95); }
     }
 
+    div.secondary {
+      color: #1a7ae0;
+      background-color: #268dfc3a;
+    }
+
     div.disabledBTN {
       background-color: #dedede;
-      border: 1px solid #828588;
-      box-shadow: 0px 1px 9px #dadada;
-      color: #828588;
+      color: #6c6e6f;
       cursor: not-allowed;
     }
   }
@@ -216,6 +258,7 @@ div.id {
 
       div {
         width: 100%;
+        height: 380px;
         border-radius: 0;
       }
     }

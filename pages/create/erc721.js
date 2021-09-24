@@ -7,9 +7,9 @@ import { create } from 'ipfs-http-client';
 
 const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET }) => {
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-  const [name, setName] = useState()
-  const [description, setDescription] = useState()
-  const [price, setPrice] = useState()
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState(0)
   const [selectedFile, setSelectedFile] = useState('')
   const [fileErrorMessage, setFileErrorMessage] = useState(false)
   const [mintLoading, setMintLoading] = useState(false)
@@ -27,7 +27,7 @@ const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET
   const mintNFT = async() => {
     setMintLoading(true)
 
-    const address = localStorage.getItem('wallet')
+    const address = ethereum.selectedAddress
     const uri = `${address.slice(2, 7)}${address.slice(37, 42)}-${Date.now()}`
 
     // Infura IPFS Authentication
@@ -57,14 +57,15 @@ const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET
     const web3 = new Web3(ethereum)
     const contract = new web3.eth.Contract(abi, NFT_CONTRACT)
     let response = await contract.methods.mintNFT(price, uri).send({from: address})
-    console.log(response)
+    console.log(response) 
 
     // Insert data to Supabase json Table
     const { dbData, dbError } = await supabase
     .from('json')
     .insert({
       uri: uri,
-      tokenID: response.events.Transfer.returnValues.tokenId,
+      // tokenID: response.events.Transfer.returnValues.tokenId,
+      tokenID: 2,
       owner: address,
       holder: address,
       price: price,
@@ -77,6 +78,8 @@ const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET
     })
 
     setMintLoading(false)
+
+    window.open('/', '_self')
   }
 
   return (
@@ -127,7 +130,7 @@ const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET
         </div>
         <div>
           <p>You will recieve</p>
-          <p>{price == null ? 0 :  price * (98/100)} WASTE</p>
+          <p>{price == null ? 0 :  price * (98/100)} BNB</p>
         </div>
       </div>
 

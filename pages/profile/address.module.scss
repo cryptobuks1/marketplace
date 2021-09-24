@@ -1,0 +1,123 @@
+div.address {
+
+  div.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 20px;
+    margin-bottom: 14px;
+
+    div.profileImg {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 100px;
+    }
+
+    p.edit {
+      margin-top: 10px;
+      color: #808080;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.1s ease;
+
+      &:active { transform: scale(0.95); }
+    }
+
+    p.name {
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    p.username {
+      font-weight: 600;
+      color: #212121;
+      background: linear-gradient(90deg, #fd1d1d 0%, #833ab4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.bio {
+      margin-block: 18px;
+      font-weight: 500;
+      max-width: 50%;
+      text-align: center;
+      color: #808080;
+    }
+    
+    ul {
+      list-style: none;
+      margin-top: 10px;
+
+      li {
+        display: inline-block;
+        margin-inline: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.1s ease;
+
+        &.address {
+
+          i {
+            color: #268ffc;
+          }
+        }
+
+        &.social {
+
+          &:nth-of-type(1) i {
+            color: #5BA4D5;
+          }
+
+          &:nth-of-type(2) i {
+            color: #212121;
+            background: linear-gradient(90deg, #fd1d1d 0%, #833ab4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+
+        i {
+          margin-right: 2px;
+        }
+        
+        &:active { transform: scale(0.95); }
+      }
+    }
+  } // div.profiles
+
+  div.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  div.address {
+
+    div.cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.address {
+
+    div.cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}

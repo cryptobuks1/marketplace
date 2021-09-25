@@ -90,10 +90,12 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
   } 
 
   useEffect(async () => {
-    const user = await getUser(ethereum.selectedAddress)
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+    const user = await getUser(accounts[0])
     
     getUsers()
-    setWallet(ethereum.selectedAddress)
+    setWallet(accounts[0])
     setCurrentUser(user)
     getIfNFTLiked(nft, user, setLiked, setLikeCount)
   }, [])

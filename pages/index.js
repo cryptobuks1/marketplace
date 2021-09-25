@@ -1,12 +1,9 @@
-import Web3 from 'web3'
 import styles from '../styles/Home.module.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from '../components/Cards/Card'
 import { createClient } from '@supabase/supabase-js'
 import { getTrendingNFTs } from '../utils/NFTs'
-const tokenABI = require('../contracts/abis/Token.json')
-const nftABI = require('../contracts/abis/NFT.json')
 
 export default function Home({data, SUPABASE_URL, SUPABASE_KEY}) {
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -43,7 +40,7 @@ export default function Home({data, SUPABASE_URL, SUPABASE_KEY}) {
         </div>
       </div>
       <div className={styles.horizontalCards}>
-        {s7DayTrending && s7DayTrending.map((nft, index) => (
+        {s7DayTrending && s7DayTrending.slice(0, 10).map((nft, index) => (
           <Card 
             nft={nft}
             wallet={wallet}

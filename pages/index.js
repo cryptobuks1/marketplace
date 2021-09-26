@@ -4,6 +4,7 @@ import axios from 'axios'
 import Card from '../components/Cards/Card'
 import { createClient } from '@supabase/supabase-js'
 import { getTrendingNFTs } from '../utils/NFTs'
+import TopUsers from '../components/TopUsers/TopUsers'
 
 export default function Home({data, SUPABASE_URL, SUPABASE_KEY}) {
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -48,6 +49,8 @@ export default function Home({data, SUPABASE_URL, SUPABASE_KEY}) {
             key={index} />
         ))}
       </div>
+
+      <TopUsers />
 
       <div className={styles.header}>
         <p className={styles.title}>Explore 🔥</p>

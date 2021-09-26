@@ -8,8 +8,10 @@ const Card = ({nft}) => {
   const [dropdown, setDropdown] = useState(false)
 
   const loadURL = (url) => window.open(url, '_self')
+  const copyURL = () => navigator.clipboard.writeText(`https://nft.wastebridge.org/nft/${nft.id}`)
 
   useEffect(async() => {
+    console.log(nft.holder)
     setHolder(await getUser(nft.holder))
   }, [])
 
@@ -22,8 +24,8 @@ const Card = ({nft}) => {
 
         {dropdown &&
           <div className={styles.dropdown}>
-            <p>Share</p>  
-            <p onClick={() => loadURL(`/nft/${nft.id}`)}>Buy Now</p>  
+            <p onClick={copyURL}><i className='fad fa-share-alt'></i> Share</p>  
+            <p onClick={() => loadURL(`/nft/${nft.id}`)}><i className='fad fa-shopping-basket'></i> Buy Now</p>  
           </div>}
       </div>
       <div className={styles.img} onClick={() => loadURL(`/nft/${nft.id}`)}>

@@ -1,0 +1,37 @@
+div.topUsers {
+  margin-bottom: 20px;
+
+  div.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    padding-bottom: 0;
+
+    p.title {
+      color: #040405;
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+
+  div.usersList {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(10, 250px);
+    overflow-x: scroll;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.topUsers {
+
+    div.header {
+      padding: 0px 14px;
+      margin-top: 10px;
+  
+      p.title {
+        font-size: 24px;
+      }
+    }
+  }
+}

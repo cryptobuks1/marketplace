@@ -50,7 +50,7 @@ div.address {
     p.bio {
       margin-block: 18px;
       font-weight: 500;
-      max-width: 50%;
+      max-width: 60%;
       text-align: center;
       color: #808080;
     }
@@ -115,6 +115,13 @@ div.address {
 
 @media screen and (max-width: 500px) {
   div.address {
+
+    div.profile {
+
+      p.bio {
+        max-width: 100%;
+      }
+    }
 
     div.cards {
       grid-template-columns: 1fr;

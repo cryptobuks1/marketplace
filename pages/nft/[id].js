@@ -103,9 +103,8 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
   return (
     <div className={styles.id}>
       <div className={styles.img}>
-        <div style={{backgroundImage: `url(${nft.data.image})`}}>
-          <i className='far fa-search-plus' onClick={() => loadURL(nft.data.image)}></i>
-        </div>
+        <img src={nft.data.image} alt='' />
+        <i className='far fa-search-plus' onClick={() => loadURL(nft.data.image)}></i>
       </div>
       <div className={styles.details}>
         <div className={styles.top}>

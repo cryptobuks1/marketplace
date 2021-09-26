@@ -29,8 +29,10 @@ const address = ({ address, SUPABASE_URL, SUPABASE_KEY }) => {
   }
 
   useEffect(async() => {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
     getProfile()
-    setSignedWallet(getMetamaskUser())
+    setSignedWallet(accounts[0])
     setProfileNFTs(await getProfileNFTs(address))
   }, [])
   

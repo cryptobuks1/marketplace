@@ -1,40 +1,34 @@
 div.id {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  height: 90vh;
-  overflow: hidden;
+  width: 700px;
+  margin: 0 auto;
 
   div.img {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    div {
-      position: relative;
+    img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 6px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 90%;
-      height: 65%;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      color: #1a7ae0;
+      background-color: #268dfc3a;
+      width: 40px;
+      height: 35px;
+      cursor: pointer;
+      transition: 0.1s ease;
 
-      i {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        color: #1a7ae0;
-        background-color: #268dfc3a;
-        width: 40px;
-        height: 35px;
-        cursor: pointer;
-        transition: 0.1s ease;
-
-        &:active { transform: scale(0.95); }
-      }
+      &:active { transform: scale(0.95); }
     }
   } // div.img
 
@@ -192,7 +186,7 @@ div.id {
       align-items: center;
       justify-content: center;
       // width: fit-content;
-      margin: 0 auto;
+      margin-left: auto;
       padding: 8px 14px;
       border-radius: 2px;
       background-color: #268ffc;
@@ -251,23 +245,12 @@ div.id {
 // Media
 @media screen and (max-width: 800px) {
   div.id {
-    display: block;
-    overflow: scroll;
+    width: 100%;
 
     div.img {
-
-      div {
-        width: 100%;
-        height: 380px;
+      
+      img {
         border-radius: 0;
-      }
-    }
-
-    div.list {
-
-      div.btn {
-        margin: 0;
-        margin-left: auto;
       }
     }
   }

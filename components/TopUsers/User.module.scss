@@ -1,0 +1,53 @@
+div.user {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover { background-color: rgba(4, 4, 5, 0.05); }
+  
+  p.index {
+    font-weight: 500;
+    margin-right: 10px;
+    color: #808080;
+  }
+
+  div.img {
+    position: relative;
+
+    div.imgInside {
+      width: 48px;
+      height: 48px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
+    }
+
+    div.badge {
+      position: absolute;
+      bottom: -2px;
+      right: 0px;
+      color: #feda03;
+    }
+  }
+
+  div.info {
+    padding-inline: 10px 20px;
+
+    p.name {
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    p.spentBNB {
+      font-weight: 500;
+      font-size: 14px;
+      color: #808080;
+    }
+  }
+}

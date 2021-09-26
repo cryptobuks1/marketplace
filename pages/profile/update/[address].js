@@ -14,8 +14,8 @@ const address = ({address, SUPABASE_URL, SUPABASE_KEY, IPFS_ID, IPFS_SECRET}) =>
   const [bio, setBio] = useState('')
   const [profileIMG, setProfileIMG] = useState('')
 
-  const getData = async() => {
-    ethereum.selectedAddress != address && window.open('/', '_self')
+  const getData = async(user) => {
+    user != address && window.open('/', '_self')
 
     const { data, error } = await supabase
       .from('profiles')
@@ -83,8 +83,10 @@ const address = ({address, SUPABASE_URL, SUPABASE_KEY, IPFS_ID, IPFS_SECRET}) =>
     return url
   }
 
-  useEffect(() => {
-    getData()
+  useEffect(async() => {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    
+    getData(accounts[0])
   }, [])
 
   return (

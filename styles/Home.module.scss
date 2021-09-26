@@ -62,9 +62,7 @@ div.home {
           margin: 5px;
           border-radius: 6px;
           
-          &:hover {
-            background-color: rgba(4, 4, 5, 0.05);
-          }
+          &:hover { background-color: rgba(4, 4, 5, 0.05); }
         }
       }
     }
@@ -113,7 +111,7 @@ div.home {
   }
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1200px) {
   div.home {
 
     div.cards {
@@ -136,6 +134,7 @@ div.home {
 
     div.header {
       padding: 0px 14px;
+      margin-top: 10px;
   
       p.title {
         font-size: 24px;

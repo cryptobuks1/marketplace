@@ -12,6 +12,7 @@ const nftABI = require('../../contracts/abis/NFT.json')
 const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => {
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
   
+  const [globalLoader, setGlobalLoader] = useState(true)
   const [wallet, setWallet] = useState()
   const [processLoading, setProcessLoading] = useState(false)
   const [approveLoading, setApproveLoading] = useState(false)
@@ -98,92 +99,96 @@ const id = ({nft, SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, TOKEN_CONTRACT}) => 
     setWallet(accounts[0])
     setCurrentUser(user)
     getIfNFTLiked(nft, user, setLiked, setLikeCount)
+    setGlobalLoader(false)
   }, [])
 
   return (
     <div className={styles.id}>
-      <div className={styles.img}>
-        <img src={nft.data.image} alt='' />
-        <i className='far fa-search-plus' onClick={() => loadURL(nft.data.image)}></i>
-      </div>
-      <div className={styles.details}>
-        <div className={styles.top}>
-          <p className={styles.name}>{nft.data.name}</p>
-          <div className={`${styles.likes} ${liked && styles.liked}`} onClick={() => !liked ? likeNFT(nft, currentUser, setLiked, likeCount, setLikeCount) : unlikeNFT(nft, currentUser, setLiked, likeCount, setLikeCount)}>
-            <i className={!liked ? 'far fa-heart' : 'fas fa-heart'}></i> 
-            {likeCount}
+    {!globalLoader &&
+      <>
+        <div className={styles.img}>
+          <img src={nft.data.image} alt='' />
+          <i className='far fa-search-plus' onClick={() => loadURL(nft.data.image)}></i>
+        </div>
+        <div className={styles.details}>
+          <div className={styles.top}>
+            <p className={styles.name}>{nft.data.name}</p>
+            <div className={`${styles.likes} ${liked && styles.liked}`} onClick={() => !liked ? likeNFT(nft, currentUser, setLiked, likeCount, setLikeCount) : unlikeNFT(nft, currentUser, setLiked, likeCount, setLikeCount)}>
+              <i className={!liked ? 'far fa-heart' : 'fas fa-heart'}></i> 
+              {likeCount}
+            </div>
           </div>
-        </div>
 
-        <div className={styles.accounts}>
-          <ul>
-            <li>Owner: {nft.owner == wallet && '(You)'}</li>
-            {owner ?
-              <li><div className={styles.img} style={{backgroundImage: `url(${owner.profileImage})`}} /> {owner.name}</li>
-            :
-              <li><Jazzicon account={nft.owner} diameter={34} /> {nft.owner.slice(0, 6)}...{nft.owner.slice(38, 42)}</li>
-            }
-          </ul>
-          <ul>
-            <li>Holder: {nft.holder == wallet && '(You)'}</li>
-            {holder ?
-              <li><div className={styles.img} style={{backgroundImage: `url(${holder.profileImage})`}} /> {holder.name}</li>
-            :
-              <li><Jazzicon account={nft.holder} diameter={34} /> {nft.holder.slice(0, 6)}...{nft.holder.slice(38, 42)}</li>
-            }
-          </ul>
-        </div>
-
-        <p className={styles.description}>{nft.data.description}</p>
-
-        {nft.isListed ?
-          <div className={styles.buy}>
+          <div className={styles.accounts}>
             <ul>
-              <li>Price</li>
-              <li>{nft.price} <span>BNB</span></li>
+              <li>Owner: {nft.owner == wallet && '(You)'}</li>
+              {owner ?
+                <li><div className={styles.img} style={{backgroundImage: `url(${owner.profileImage})`}} /> {owner.name}</li>
+              :
+                <li><Jazzicon account={nft.owner} diameter={34} /> {nft.owner.slice(0, 6)}...{nft.owner.slice(38, 42)}</li>
+              }
             </ul>
+            <ul>
+              <li>Holder: {nft.holder == wallet && '(You)'}</li>
+              {holder ?
+                <li><div className={styles.img} style={{backgroundImage: `url(${holder.profileImage})`}} /> {holder.name}</li>
+              :
+                <li><Jazzicon account={nft.holder} diameter={34} /> {nft.holder.slice(0, 6)}...{nft.holder.slice(38, 42)}</li>
+              }
+            </ul>
+          </div>
 
-            {nft.holder != wallet ? 
-              <div className={styles.btn} onClick={buyNFT}>
-                {processLoading ?
-                  <>
-                    <i className={`far fa-spinner-third ${styles.spinner}`}></i>
-                    {approveLoading && <p>Approving</p>}
-                    {buyLoading && <p>Buying</p>}
-                  </>
-                :
+          <p className={styles.description}>{nft.data.description}</p>
+
+          {nft.isListed ?
+            <div className={styles.buy}>
+              <ul>
+                <li>Price</li>
+                <li>{nft.price} <span>BNB</span></li>
+              </ul>
+
+              {nft.holder != wallet ? 
+                <div className={styles.btn} onClick={buyNFT}>
+                  {processLoading ?
+                    <>
+                      <i className={`far fa-spinner-third ${styles.spinner}`}></i>
+                      {approveLoading && <p>Approving</p>}
+                      {buyLoading && <p>Buying</p>}
+                    </>
+                  :
+                    <p>Buy NFT</p>
+                  }
+                </div>
+              :
+                <div className={`${styles.btn} ${styles.disabledBTN}`}>
                   <p>Buy NFT</p>
-                }
-              </div>
-            :
-              <div className={`${styles.btn} ${styles.disabledBTN}`}>
-                <p>Buy NFT</p>
-              </div>    
-            }
-          </div>
-        :
-          <div className={styles.list}>
-            <ul>
-              <li>Not for sale</li>
-              <li><span>Previous Price:</span> {nft.price} BNB</li>
-            </ul>
-            {wallet == nft.holder &&
-              <div className={`${styles.btn} ${styles.secondary}`} onClick={listNFT}>
-                {!listingLoading ?
-                  <>
-                    <i className='far fa-check'></i>
-                    <p>List NFT</p>
-                  </>
-                :
-                  <>
-                    <i className={`far fa-spinner-third ${styles.spinner}`}></i>
-                    <p>Listing NFT</p>
-                  </>
-                }
-              </div>}
-          </div>
-        }
-      </div>
+                </div>    
+              }
+            </div>
+          :
+            <div className={styles.list}>
+              <ul>
+                <li>Not for sale</li>
+                <li><span>Previous Price:</span> {nft.price} BNB</li>
+              </ul>
+              {wallet == nft.holder &&
+                <div className={`${styles.btn} ${styles.secondary}`} onClick={listNFT}>
+                  {!listingLoading ?
+                    <>
+                      <i className='far fa-check'></i>
+                      <p>List NFT</p>
+                    </>
+                  :
+                    <>
+                      <i className={`far fa-spinner-third ${styles.spinner}`}></i>
+                      <p>Listing NFT</p>
+                    </>
+                  }
+                </div>}
+            </div>
+          }
+        </div>
+      </>}
     </div>
   )
 }

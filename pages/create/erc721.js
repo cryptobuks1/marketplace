@@ -64,8 +64,7 @@ const erc721 = ({ SUPABASE_URL, SUPABASE_KEY, NFT_CONTRACT, IPFS_ID, IPFS_SECRET
     .from('json')
     .insert({
       uri: uri,
-      // tokenID: response.events.Transfer.returnValues.tokenId,
-      tokenID: 2,
+      tokenID: response.events.Transfer.returnValues.tokenId,
       owner: address,
       holder: address,
       price: price,

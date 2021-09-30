@@ -5,18 +5,15 @@ div.header {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #ffffffcc;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
   backdrop-filter: blur(20px);
-  z-index: 10;
+  z-index: 9;
   
   div.left {
     padding-left: 10px;
-
-    img {
-      width: 38px;
-      cursor: pointer;
-
-      &:active { transform: scale(0.95); }
-    }
+    padding-block: 10px;
   }
 
   div.right {
@@ -27,58 +24,35 @@ div.header {
   div.btn {
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
-    background-color: #268ffc;
+    background-color: #00b88d;
     color: #ffffff;
-    height: 30px;
-    padding-inline: 12px;
-    margin-inline: 10px;
-    border-radius: 2px;
+    height: 34px;
+    padding-inline: 18px;
+    margin-inline: 5px;
+    border-radius: 50px;
     cursor: pointer;
     user-select: none;
     transition: 0.1s ease;
-
-    img {
-      width: 18px;
-      margin-right: 6px;
-      filter: brightness(0) invert(1);
-    }
 
     &:active { transform: scale(0.98); }
   }
 
-  div.wallet {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a7ae0;
-    background-color: #268dfc3a;
-    height: 30px;
-    padding-inline: 10px;
-    margin-inline: 10px;
-    border-radius: 2px;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.1s ease;
+  div.bar {
+    display: none;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
+    background-color: #ffffff;
+    color: #212121;
+  }
+}
 
-    div {
+@media screen and (max-width: 650px) {
+  div.header {
+
+    div.bar {
       display: flex;
-      align-items: center;
-      margin-right: 6px;
     }
-
-    div.img {
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 20px;
-      height: 20px;
-      border-radius: 50px;
-    }
-
-    &:active { transform: scale(0.98); }
   }
 }
 
@@ -91,7 +65,6 @@ div.header {
     } 
   }
 }
-
 
 //Only show on 3x density devices
 @media only screen and (-webkit-min-device-pixel-ratio: 3) {

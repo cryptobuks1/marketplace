@@ -24,11 +24,31 @@
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: #ffffff;
+
+html {
+  background-color: #ECEFF5;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+div.layout {
+  display: grid;
+  grid-template-columns: 200px calc(100% - 200px);
+}
+
+div.layout div.rightMenu {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* height: 100vh; */
+  /* width: calc(100% - 200px); */
+}
+
+@media screen and (max-width: 630px) {
+  div.layout {
+    display: block;
+  }
 }

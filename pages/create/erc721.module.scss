@@ -1,12 +1,17 @@
 div.erc721 {
-  width: 400px;
+  width: 430px;
   margin: 0 auto;
-  padding-block: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
+  border-radius: 24px;
   
   div.fileField {
     border: 2px dashed #dedede;
     background-color: #ffffff;
     padding-block: 30px;
+    border-radius: 12px;
 
     p.supportedFiles {
       text-align: center;
@@ -20,10 +25,11 @@ div.erc721 {
       align-items: center;
       width: fit-content;
       margin: 0 auto;
-      padding: 8px 14px;
-      border-radius: 2px;
-      background-color: #268dfc3a;
-      color: #1a7ae0;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background-color: #00b88d27;
+      box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
+      color: #00b88d;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -70,7 +76,7 @@ div.erc721 {
 
     img {
       width: 100%;
-      border-radius: 2px;
+      border-radius: 12px;
     }
 
     i {
@@ -107,12 +113,17 @@ div.erc721 {
 
     input,
     textarea {
-      border: 1px solid #dedede;
-      border-radius: 2px;
+      border: 1px solid #eeeeee;
+      border-radius: 12px;
       padding: 10px;
       width: 100%;
 
-      &:focus { outline: none; }
+      &:focus { 
+        outline: none; 
+        border: 1px solid #00b88d;
+        box-shadow: 0 0 0 3px #00b88d40;
+        transition: 0.2s ease;
+      }
     }
 
     textarea {
@@ -143,10 +154,11 @@ div.erc721 {
     // width: fit-content;
     margin: 0 auto;
     margin-top: 30px;
-    padding: 8px 14px;
-    border-radius: 2px;
-    color: #1a7ae0;
-    background-color: #268dfc3a;
+    padding-block: 16px;
+    border-radius: 12px;
+    color: #00b88d;
+    background-color: #00b88d27;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
     font-weight: 500;
     cursor: pointer;
     user-select: none;
@@ -162,8 +174,6 @@ div.erc721 {
         animation: spin 1.5s linear infinite;
       }
     }
-
-    &:hover { opacity: 0.9; }
 
     &:active { transform: scale(0.95); }
   } // div.mintBTN

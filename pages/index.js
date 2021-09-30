@@ -56,7 +56,7 @@ export default function Home({data, SUPABASE_URL, SUPABASE_KEY}) {
         <p className={styles.title}>Explore 🔥</p>
       </div>
       <div className={styles.cards}>
-        {data.map((nft, index) => (
+        {data.slice(0, 15).map((nft, index) => (
           <Card 
             nft={nft}
             wallet={wallet}

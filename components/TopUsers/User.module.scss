@@ -2,12 +2,15 @@ div.user {
   display: flex;
   align-items: center;
   margin: 15px;
-  padding: 10px 15px;
+  padding: 14px 15px;
   border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 3%);
   user-select: none;
   cursor: pointer;
+  transition: 0.1s ease;
 
-  &:hover { background-color: rgba(4, 4, 5, 0.05); }
+  &:hover { filter: brightness(0.98); }
   
   p.index {
     font-weight: 500;
@@ -30,7 +33,7 @@ div.user {
 
     div.badge {
       position: absolute;
-      bottom: -2px;
+      bottom: 0px;
       right: 0px;
       color: #feda03;
     }

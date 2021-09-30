@@ -8,7 +8,7 @@ div.home {
 
     p.title {
       color: #040405;
-      font-size: 30px;
+      font-size: 25px;
       font-weight: 600;
     }
 
@@ -25,10 +25,10 @@ div.home {
         transition: 0.1s ease;
         
         p {
-          font-size: 30px;
+          font-size: 25px;
           font-weight: 600;
           color: #212121;
-          background: linear-gradient(90deg, #268ffc 0%, #833ab4 80%);
+          background: linear-gradient(90deg, #00b88d 0%, #268ffc 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -36,7 +36,7 @@ div.home {
         i {
           font-size: 14px;
           margin-left: 8px;
-          color: #833ab4;
+          color: #268ffc;
         }
         
         &:active { transform: scale(0.97); }
@@ -120,6 +120,15 @@ div.home {
   }
 }
 
+@media screen and (max-width: 1100px) {
+  div.home {
+
+    div.cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   div.home {
 
@@ -129,7 +138,7 @@ div.home {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
   div.home {
 
     div.header {
